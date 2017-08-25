@@ -18,20 +18,37 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap3-typeahead.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container"style="width:600px;" >
     <div class="input-group">
-        <input class="form-control " placeholder="검색" />
+        <input class="form-control " placeholder="검색" id="typeahead" data-provide="typeahead"/>
         <span class="input-group-addon">찾기</span>
     </div>
+
+    <input type="text" name="country" id="country" class="form-control input-lg" autocomplete="off" placeholder="키워드"/>
 </div>
-
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+<script>
+    $(document).ready(function(){
+       $('#country').typeahead({
+            source:function (query, result) {
+                $.ajax({
+                    url:'/search',
+                    method:'GET',
+                    dataType:'json',
+                    success:function (data) {
+                        result($.map(data, function (item) {
+                            return item;
+                        }));
+                    }
+                })
+            }
+       });
+    });
+</script>
