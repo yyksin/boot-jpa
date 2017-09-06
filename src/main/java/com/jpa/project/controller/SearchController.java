@@ -1,8 +1,8 @@
 package com.jpa.project.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.jpa.project.model.Users;
-import com.jpa.project.repository.UserRepository;
+import com.google.gson.Gson;
+import com.jpa.project.model.T_SEARCH;
+import com.jpa.project.repository.SearchRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IMC021 on 2017. 8. 7..
  */
 @Controller
-public class IndexController {
+public class SearchController {
     @RequestMapping("/")
     public String home(Model model){
-        return "home";
+        return "searchBar";
     }
 
     @Autowired
-    UserRepository userRepository;
+    SearchRepository searchRepository;
 
     @RequestMapping("/home")
     public String home1(Model model){
-        return "home";
+        return "searchBar";
     }
 
     @RequestMapping("/search")
     @ResponseBody
     public String search(){
 
-        List<Users> users = userRepository.findAll();
+        List<T_SEARCH> memoList = searchRepository.findMemo();
 
         JSONObject jsonObject = new JSONObject();
 
@@ -48,8 +47,8 @@ public class IndexController {
 
         jsonObject.put("values", list);
 
+        String result = new Gson().toJson(memoList);
 
-        //return "{\"0\":\"86\",\"1\":\"alex\",\"2\":\"86\",\"3\":\"alexander38\"}";
-        return jsonObject.toString();
+        return result;
     }
 }

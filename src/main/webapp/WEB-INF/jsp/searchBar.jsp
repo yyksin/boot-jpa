@@ -30,13 +30,13 @@
         <span class="input-group-addon">찾기</span>
     </div>
 
-    <input type="text" name="country" id="country" class="form-control input-lg" autocomplete="off" placeholder="키워드"/>
+    <input type="text" name="searchBar" id="searchBar" class="form-control input-lg" autocomplete="off" placeholder="키워드"/>
 </div>
 </body>
 </html>
 <script>
     $(document).ready(function(){
-       $('#country').typeahead({
+       $('#searchBar').typeahead({
             source:function (query, result) {
                 $.ajax({
                     url:'/search',
