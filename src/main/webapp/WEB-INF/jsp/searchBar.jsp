@@ -24,12 +24,18 @@
     <script src="/js/bootstrap3-typeahead.min.js"></script>
 </head>
 <body>
-<div class="container"style="width:600px;" >
-    <div class="input-group">
-        <input class="form-control " placeholder="검색" id="typeahead" data-provide="typeahead"/>
-        <span class="input-group-addon">찾기</span>
-    </div>
+<div class="sidebar">
+    <h2>aaaa</h2>
+    <ul>
+        <li><a href="">A</a></li>
+        <li><a href="">B</a></li>
+        <li><a href="">C</a></li>
+    </ul>
 
+</div>
+
+
+<div class="container"style="width:600px;" >
     <input type="text" name="searchBar" id="searchBar" class="form-control input-lg" autocomplete="off" placeholder="키워드"/>
 </div>
 </body>

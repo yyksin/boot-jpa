@@ -1,6 +1,7 @@
 package com.jpa.project.controller;
 
 import com.google.gson.Gson;
+import com.jpa.project.cache.SearchCache;
 import com.jpa.project.model.T_SEARCH;
 import com.jpa.project.repository.SearchRepository;
 import org.json.JSONArray;
@@ -26,6 +27,9 @@ public class SearchController {
     @Autowired
     SearchRepository searchRepository;
 
+    @Autowired
+    SearchCache searchCache;
+
     @RequestMapping("/home")
     public String home1(Model model){
         return "searchBar";
@@ -35,7 +39,12 @@ public class SearchController {
     @ResponseBody
     public String search(){
 
-        List<T_SEARCH> memoList = searchRepository.findMemo();
+
+        searchCache.getAllMemo();
+
+        //List<T_SEARCH> memoList = searchRepository.findAll();
+        //ehcache를 사용하여 셀렉트를 최초 한번만 한다.
+        List<T_SEARCH> memoList = searchCache.getAllMemo();
 
         JSONObject jsonObject = new JSONObject();
 

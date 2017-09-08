@@ -40,4 +40,13 @@ public class T_SEARCH {
     public Date getRdate() {
         return rdate;
     }
+
+    @Override
+    public String toString() {
+        return "T_SEARCH{" +
+                "id=" + id +
+                ", memo='" + memo + '\'' +
+                ", rdate=" + rdate +
+                '}';
+    }
 }

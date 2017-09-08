@@ -14,7 +14,7 @@ public interface SearchRepository extends JpaRepository<T_SEARCH, Integer>{
 
 
     @Query("SELECT CONCAT(IFNULL(SUBJECT,''),' ',MEMO) AS MEMO  FROM T_SEARCH")
-    List<T_SEARCH> findMemo();
+    List<T_SEARCH> findAllMemo();
 
 
 }
