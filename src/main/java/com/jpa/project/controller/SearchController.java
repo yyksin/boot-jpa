@@ -32,7 +32,7 @@ public class SearchController {
 
     @RequestMapping("/home")
     public String home1(Model model){
-        return "searchBar";
+        return "basic-table";
     }
 
     @RequestMapping("/search")
