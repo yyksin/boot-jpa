@@ -17,6 +17,9 @@ public class T_SEARCH {
     @Column(name = "memo", nullable = false)
     private String memo;
 
+    @Column(name = "subject", nullable = true)
+    private String subject;
+
     @Column(insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date rdate;
@@ -39,6 +42,18 @@ public class T_SEARCH {
 
     public Date getRdate() {
         return rdate;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setRdate(Date rdate) {
+        this.rdate = rdate;
     }
 
     @Override

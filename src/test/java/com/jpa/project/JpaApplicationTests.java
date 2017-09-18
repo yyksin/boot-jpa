@@ -27,7 +27,6 @@ public class JpaApplicationTests {
 	@Autowired
 	Environment environment;
 
-
 	@Test
 	public void contextLoads() {
 		System.out.println(msg);
