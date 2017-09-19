@@ -4,7 +4,13 @@ import com.google.gson.Gson;
 import com.jpa.project.cache.SearchCache;
 import com.jpa.project.model.T_SEARCH;
 import com.jpa.project.repository.SearchRepository;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +22,8 @@ import java.util.List;
  */
 @Controller
 public class HomeController {
+
+    Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
     SearchRepository searchRepository;
@@ -41,15 +49,23 @@ public class HomeController {
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(value = "searchTxt",required = false) String str){
 
-        List<T_SEARCH> list = null;
+        Page<T_SEARCH>  PageList = null;
+        //페이지수, sort
+        PageRequest pageRequest = new PageRequest(0,100,new Sort(Sort.Direction.ASC,"id"));
 
-        if(str != null){
-            list = searchRepository.findByMemo(str);
+        if(StringUtils.isNotEmpty(str)){
+            //list = searchRepository.findByMemo(str);
+            PageList = searchRepository.findLikeMemo(str,pageRequest);
         }else{
-            list = searchRepository.findAll();
+
+
+            PageList = searchRepository.findAll(pageRequest);
+            logger.info("size {}",PageList.getContent());
         }
 
-        model.addAttribute("list", list);
+        List<T_SEARCH> result = PageList.getContent();
+
+        model.addAttribute("list", result);
         return "list";
     }
 
@@ -94,6 +110,7 @@ public class HomeController {
     @PostMapping("/save")
     public String save(@ModelAttribute T_SEARCH t_search){
         searchRepository.save(t_search);
+        searchCache.refreshAll();
         return "redirect:/list";
     }
 

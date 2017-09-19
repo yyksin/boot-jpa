@@ -5,11 +5,14 @@
 <head>
     <title>yyk | 목록페이지</title>
     <content tag="style">
-    <style>
-        .row{
-            margin-bottom:20px;
-        }
-    </style>
+        <style>
+            .row{
+                margin-bottom:20px;
+            }
+            .highlight {
+                 background-color: #FFFF88;
+             }
+        </style>
     </content>
 </head>
 <body>
@@ -20,7 +23,7 @@
             <form>
                 <div class="input-group">
 
-                    <input type="text" class="form-control" placeholder="" name="searchTxt">
+                    <input type="text" class="form-control" placeholder="" name="searchTxt" value="${param.searchTxt}">
                     <span class="input-group-btn">
 
                 <button class="btn btn-default" type="submit">찾기</button>
@@ -56,25 +59,50 @@
             </tbody>
         </table>
     </div>
-    <nav>
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <%--<nav>--%>
+        <%--<ul class="pagination">--%>
+            <%--<li>--%>
+                <%--<a href="#" aria-label="Previous">--%>
+                    <%--<span aria-hidden="true">&laquo;</span>--%>
+                <%--</a>--%>
+            <%--</li>--%>
+            <%--<li><a href="#">1</a></li>--%>
+            <%--<li><a href="#">2</a></li>--%>
+            <%--<li><a href="#">3</a></li>--%>
+            <%--<li><a href="#">4</a></li>--%>
+            <%--<li><a href="#">5</a></li>--%>
+            <%--<li>--%>
+                <%--<a href="#" aria-label="Next">--%>
+                    <%--<span aria-hidden="true">&raquo;</span>--%>
+                <%--</a>--%>
+            <%--</li>--%>
+        <%--</ul>--%>
+    <%--</nav>--%>
+    <nav id="page-selection">
 
+    </nav>
+    <script>
+        // init bootpag
+        $('#page-selection').bootpag({
+            total: 10
+        }).on("page", function(event, /* page number here */ num){
+            $("#content").html("Insert content"); // some ajax content loading...
+        });
+    </script>
 </body>
 </html>
+<content tag="scripts">
+    <script src="/js/jquery.bootpag.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("body td").highlight("${param.searchTxt}");
+
+        // init bootpag
+        $('#page-selection').bootpag({
+            total: 10
+        }).on("page", function(event, /* page number here */ num){
+            $("body").html("Insert content"); // some ajax content loading...
+        });
+    });
+    </script>
+</content>

@@ -26,9 +26,9 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/new">등록/수정</a></li>
-                <li><a href="/list">목록</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/new">UPDATE</a></li>
+                <li><a href="/list">LIST</a></li>
             </ul>
         </div>
     </nav>
@@ -39,6 +39,8 @@
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.highlight.js"></script>
+
 <script>
     $(document).ready(function () {
         $(function () {
