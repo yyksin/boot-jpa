@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-    <title>yyk | 목록페이지</title>
+    <title>목록페이지</title>
     <content tag="style">
         <style>
             .row{
@@ -12,6 +12,11 @@
             .highlight {
                  background-color: #FFFF88;
              }
+            .cnt-span{
+                float:left;
+                padding:0 10px 10px 5px;
+                font-weight: bold;
+            }
         </style>
     </content>
 </head>
@@ -22,43 +27,46 @@
         <div class="col-lg-6">
             <form>
                 <div class="input-group">
-
+                    <input type="hidden" name="page" id="page"/>
                     <input type="text" class="form-control" placeholder="" name="searchTxt" value="${param.searchTxt}">
                     <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">찾기</button>
+                    </span>
 
-                <button class="btn btn-default" type="submit">찾기</button>
+                 </div><!-- /.col-lg-6 -->
             </form>
-          </span>
-            </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered text-left">
-            <thead>
+
+    <span class="cnt-span">총 ${totalCnt}건</span>
+
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>메모1</th>
+            <th>메모2</th>
+            <th>등록일시</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="obj" items="${list}" varStatus="status">
             <tr>
-                <th>순번</th>
-                <th>제목</th>
-                <th>메모</th>
-                <th>등록일시</th>
-                <th></th>
+                <td>${(currentPage-1)*10 + status.index+1}</td>
+                <td>${obj.title}</td>
+                <td>${obj.memo1}</td>
+                <td>${obj.memo2}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${obj.rdate}"/></td>
+                <td>
+                    <a class="btn btn-info" href="update/${obj.id}" role="button">수정</a>
+                    <a class="btn btn-danger" href="delete/${obj.id}" role="button">삭제</a>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="obj" items="${list}" varStatus="status">
-                <tr>
-                    <td>${status.index+1}</td>
-                    <td>${obj.subject}</td>
-                    <td>${obj.memo}</td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${obj.rdate}"/></td>
-                    <td>
-                        <a class="btn btn-info" href="update/${obj.id}" role="button">수정</a>
-                        <a class="btn btn-danger" href="delete/${obj.id}" role="button">삭제</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
+        </c:forEach>
+        </tbody>
+    </table>
     <%--<nav>--%>
         <%--<ul class="pagination">--%>
             <%--<li>--%>
@@ -78,17 +86,9 @@
             <%--</li>--%>
         <%--</ul>--%>
     <%--</nav>--%>
-    <nav id="page-selection">
+    <nav id="pagination">
 
     </nav>
-    <script>
-        // init bootpag
-        $('#page-selection').bootpag({
-            total: 10
-        }).on("page", function(event, /* page number here */ num){
-            $("#content").html("Insert content"); // some ajax content loading...
-        });
-    </script>
 </body>
 </html>
 <content tag="scripts">
@@ -97,11 +97,17 @@
     $(document).ready(function(){
         $("body td").highlight("${param.searchTxt}");
 
+
         // init bootpag
-        $('#page-selection').bootpag({
-            total: 10
-        }).on("page", function(event, /* page number here */ num){
-            $("body").html("Insert content"); // some ajax content loading...
+        $('#pagination').bootpag({
+            total: ${totalPage},          // total pages
+            page: ${currentPage},            // current page
+            maxVisible: 10,     // visible pagination
+            leaps: true         // next/prev leaps through maxVisible
+        }).on("page", function(event, /* page number here */ pageNum){
+            //$("body").html("Insert content"); // some ajax content loading...
+            $('#page').val(pageNum);
+            $('form').submit();
         });
     });
     </script>

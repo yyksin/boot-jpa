@@ -1,5 +1,8 @@
 package com.jpa.project.model;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.AnyMetaDef;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,16 +17,40 @@ public class T_SEARCH {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "memo", nullable = false)
-    private String memo;
+    @Column(name = "title", nullable = true)
+    private String title;
 
-    @Column(name = "subject", nullable = true)
-    private String subject;
+    @Column(name = "memo1", nullable = false)
+    private String memo1;
 
-    @Column(insertable = false, updatable = false)
+    @Column(name = "memo2", nullable = false)
+    private String memo2;
+
+    @Column(insertable = false, updatable = false,  nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date rdate;
 
+    private String name;
+
+    @PostLoad
+    public void concatTitleAndMemo(){
+        this.name = "";
+        if(StringUtils.isNotEmpty(this.title)){
+            this.name = this.title+"   ";
+        }
+        this.name += this.memo1;
+
+        if(StringUtils.isNotEmpty(this.memo2)){
+            this.name += "   "+this.memo2;
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public Integer getId() {
         return id;
     }
@@ -32,36 +59,46 @@ public class T_SEARCH {
         this.id = id;
     }
 
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
-    }
-
     public Date getRdate() {
         return rdate;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setRdate(Date rdate) {
         this.rdate = rdate;
     }
 
+    public String getMemo1() {
+        return memo1;
+    }
+
+    public void setMemo1(String memo1) {
+        this.memo1 = memo1;
+    }
+
+    public String getMemo2() {
+        return memo2;
+    }
+
+    public void setMemo2(String memo2) {
+        this.memo2 = memo2;
+    }
+
     @Override
     public String toString() {
         return "T_SEARCH{" +
                 "id=" + id +
-                ", memo='" + memo + '\'' +
+                ", memo1='" + memo1 + '\'' +
+                ", title='" + title + '\'' +
                 ", rdate=" + rdate +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

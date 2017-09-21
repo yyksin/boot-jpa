@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title><sitemesh:write property='title' /></title>
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -15,9 +14,6 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]\-->
     <style>
-        table th,td{
-            text-align: center;
-        }
     </style>
     <sitemesh:write property='page.style' />
 </head>

@@ -32,6 +32,16 @@ public class HomeController {
     SearchCache searchCache;
 
     /**
+     * 로그인
+     * @param model
+     * @return
+     */
+    @RequestMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
+
+    /**
      * 검색바
      * @param model
      * @return
@@ -47,25 +57,36 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value = "searchTxt",required = false) String str){
+    public String list(Model model,@RequestParam(value = "searchTxt",required = false) String str
+                        ,@RequestParam(value = "limit",defaultValue = "10") int limit
+                       ,@RequestParam(value="page",defaultValue = "1") int page){
+
+
 
         Page<T_SEARCH>  PageList = null;
         //페이지수, sort
-        PageRequest pageRequest = new PageRequest(0,100,new Sort(Sort.Direction.ASC,"id"));
+        PageRequest pageRequest = new PageRequest(page-1,limit,new Sort(Sort.Direction.ASC,"id"));
 
         if(StringUtils.isNotEmpty(str)){
             //list = searchRepository.findByMemo(str);
             PageList = searchRepository.findLikeMemo(str,pageRequest);
         }else{
-
-
             PageList = searchRepository.findAll(pageRequest);
             logger.info("size {}",PageList.getContent());
         }
 
+        long totalPage = PageList.getTotalPages();
+        long totalCnt = PageList.getTotalElements();
+
+        logger.info("totalpage : {}, totalCnt : {}, currentPage : {}",totalPage,totalCnt,page);
+
         List<T_SEARCH> result = PageList.getContent();
 
         model.addAttribute("list", result);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", page);
+
         return "list";
     }
 
@@ -130,6 +151,7 @@ public class HomeController {
 
         String result = new Gson().toJson(memoList);
 
+        logger.info("json data : {}", result);
         return result;
     }
 

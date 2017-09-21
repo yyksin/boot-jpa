@@ -6,15 +6,15 @@
 
     <diskStore path="java.io.tmpdir"/>
 <!--
-    timeToIdleSeconds : 몇초간 유지후 갱신한다.
-     300 -> 300초간 유지후 갱신한다. 갱신 시점은 서비스를 호출할때 시간체크를 함.
+    timeToIdleSeconds : 설정시간 동안 조회되지 않으면 제거된다.
+    timeToLiveSeconds : 설정시간이 지나면 제거된다.
 -->
     <cache name="searchCache"
            maxEntriesLocalHeap="100"
            maxEntriesLocalDisk="1000"
            eternal="false"
-           timeToIdleSeconds="300"
-           timeToLiveSeconds="600"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="6000"
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
         <persistence strategy="localTempSwap"/>

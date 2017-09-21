@@ -33,11 +33,9 @@ Sort getSort();                           //정렬정보
 public interface SearchRepository extends JpaRepository<T_SEARCH, Integer>{
 
 
-    @Query("SELECT CONCAT(IFNULL(SUBJECT,''),' ',MEMO) AS MEMO  FROM T_SEARCH")
-    List<T_SEARCH> findAllMemo();
+    //@Query(value = "SELECT t.* ,CONCAT(IFNULL(SUBJECT,''),' ',MEMO) AS MEMO  FROM T_SEARCH t",nativeQuery = true)
+    //List<T_SEARCH> findAllMemo();
 
-    List<T_SEARCH> findByMemo(String memo);
-
-    @Query("select u from T_SEARCH u  where u.memo like %:memo% OR u.subject like %:memo%")
-    Page<T_SEARCH> findLikeMemo(@Param("memo")String memo, Pageable pageable);
+    @Query("select u from T_SEARCH u  where u.memo1 like %:str% OR u.title like %:str% OR u.memo2 like %:str%")
+    Page<T_SEARCH> findLikeMemo(@Param("str")String str, Pageable pageable);
 }
