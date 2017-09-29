@@ -1,9 +1,7 @@
-package com.jpa.project.sitemesh;
+package com.jpa.project.config.sitemesh;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
-import org.sitemesh.content.tagrules.html.CoreHtmlTagRuleBundle;
-import org.sitemesh.content.tagrules.html.DivExtractingTagRuleBundle;
 import org.sitemesh.content.tagrules.html.Sm2TagRuleBundle;
 
 /**
@@ -14,6 +12,7 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder){
         builder.addDecoratorPath("/*","/WEB-INF/jsp/index.jsp")
                 .addTagRuleBundle(new Sm2TagRuleBundle());
+        builder.addExcludedPath("/login");
                 //.addExcludedPath("/js")
                 //.addExcludedPath("/plugins");
         //builder.addDecoratorPath("/*", "/WEB-INF/views/common/layout/default/base.jsp");

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>목록페이지</title>
@@ -16,6 +17,10 @@
                 float:left;
                 padding:0 10px 10px 5px;
                 font-weight: bold;
+            }
+            td, th {
+                text-align: center;
+                width: 300px;
             }
         </style>
     </content>
@@ -47,6 +52,7 @@
             <th>제목</th>
             <th>메모1</th>
             <th>메모2</th>
+            <th>메모3</th>
             <th>등록일시</th>
             <th></th>
         </tr>
@@ -58,6 +64,7 @@
                 <td>${obj.title}</td>
                 <td>${obj.memo1}</td>
                 <td>${obj.memo2}</td>
+                <td>${fn:substring(obj.memo3,0,20)}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${obj.rdate}"/></td>
                 <td>
                     <a class="btn btn-info" href="update/${obj.id}" role="button">수정</a>

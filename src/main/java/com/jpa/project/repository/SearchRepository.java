@@ -1,15 +1,11 @@
 package com.jpa.project.repository;
 
-import com.jpa.project.model.T_SEARCH;
-import org.hibernate.sql.Select;
+import com.jpa.project.entity.T_SEARCH;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import sun.jvm.hotspot.debugger.linux.sparc.LinuxSPARCThreadContext;
-
-import java.util.List;
 
 /**
  * Created by IMC021 on 2017. 9. 6..

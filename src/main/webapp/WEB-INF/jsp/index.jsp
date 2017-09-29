@@ -23,8 +23,10 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li><a href="/">HOME</a></li>
-                <li><a href="/new">UPDATE</a></li>
+                <li><a href="/update">UPDATE</a></li>
                 <li><a href="/list">LIST</a></li>
+                <li><a href="/my">MY</a></li>
+                <li><a href="/logout">LOGOUT</a></li>
             </ul>
         </div>
     </nav>

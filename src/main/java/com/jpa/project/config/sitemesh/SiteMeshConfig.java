@@ -1,8 +1,6 @@
-package com.jpa.project.config;
+package com.jpa.project.config.sitemesh;
 
-import com.jpa.project.sitemesh.SiteMeshFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**

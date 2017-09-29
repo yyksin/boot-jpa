@@ -1,8 +1,8 @@
 package com.jpa.project.controller;
 
 import com.google.gson.Gson;
-import com.jpa.project.cache.SearchCache;
-import com.jpa.project.model.T_SEARCH;
+import com.jpa.project.config.cache.SearchCache;
+import com.jpa.project.entity.T_SEARCH;
 import com.jpa.project.repository.SearchRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,6 +42,11 @@ public class HomeController {
         return "login";
     }
 
+    @RequestMapping("/logout")
+    public String logout(Model model){
+        return "login";
+    }
+
     /**
      * 검색바
      * @param model
@@ -61,11 +67,9 @@ public class HomeController {
                         ,@RequestParam(value = "limit",defaultValue = "10") int limit
                        ,@RequestParam(value="page",defaultValue = "1") int page){
 
-
-
         Page<T_SEARCH>  PageList = null;
         //페이지수, sort
-        PageRequest pageRequest = new PageRequest(page-1,limit,new Sort(Sort.Direction.ASC,"id"));
+        PageRequest pageRequest = new PageRequest(page-1,limit,new Sort(Sort.Direction.DESC, Arrays.asList("id","mdate")));
 
         if(StringUtils.isNotEmpty(str)){
             //list = searchRepository.findByMemo(str);
@@ -94,7 +98,7 @@ public class HomeController {
      * 등록 페이지
      * @return
      */
-    @GetMapping("/new")
+    @GetMapping("/update")
     public String newTask(){
         return "update";
     }
@@ -136,6 +140,18 @@ public class HomeController {
     }
 
     /**
+     * 등록 및 수정
+     * @param t_search
+     * @return
+     */
+    @PostMapping("/saveFromHome")
+    public String saveFromHome(@ModelAttribute T_SEARCH t_search){
+        searchRepository.save(t_search);
+        searchCache.refreshAll();
+        return "redirect:/";
+    }
+
+    /**
      * 검색 호출
      * @return
      */
@@ -154,5 +170,4 @@ public class HomeController {
         logger.info("json data : {}", result);
         return result;
     }
-
 }
