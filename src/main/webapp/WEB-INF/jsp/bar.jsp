@@ -75,6 +75,10 @@
                 $('#memo3').val(current.memo3);
                 $('#id').val(current.id);
             });
+
+            $input.keydown(function(e) {
+                $('form').hide();
+            });
         });
     </script>
 </content>
