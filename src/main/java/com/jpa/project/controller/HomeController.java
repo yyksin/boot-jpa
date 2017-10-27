@@ -124,6 +124,7 @@ public class HomeController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
         searchRepository.delete(id);
+        searchCache.refreshAll();
         return "redirect:/list";
     }
 

@@ -31,6 +31,12 @@
         <div class="col-xs-5">
             <input type="text" class="form-control" name="memo1" id="memo1">
         </div>
+        <span style="float: left;">
+                <select name="memo1_search_yn">
+                    <option value="Y">포함</option>
+                    <option value="N">미포함</option>
+                </select>
+            </span>
     </div>
     <div class="form-group">
         <label for="memo2" class="col-sm-2 control-label">memo2</label>
@@ -74,6 +80,7 @@
                 $('#memo2').val(current.memo2);
                 $('#memo3').val(current.memo3);
                 $('#id').val(current.id);
+                $('select').val(current.memo1_search_yn);
             });
 
             $input.keydown(function(e) {

@@ -44,17 +44,30 @@ public class T_SEARCH implements Serializable{
     @Transient
     private String name;
 
+    @Column
+    private String memo1_search_yn;
+
+    public String getMemo1_search_yn() {
+        return memo1_search_yn;
+    }
+
+    public void setMemo1_search_yn(String memo1_search_yn) {
+        this.memo1_search_yn = memo1_search_yn;
+    }
+
     @PostLoad
     public void concatTitleAndMemo(){
         this.name = "";
         if(StringUtils.isNotEmpty(this.title)){
-            this.name = this.title+"   ";
+            this.name = this.title;
         }
-        this.name += this.memo1;
+        if(StringUtils.equals(this.memo1_search_yn, "Y")){
+            this.name += "\t"+this.memo1;
+        }
 
-        if(StringUtils.isNotEmpty(this.memo2)){
-            this.name += "   "+this.memo2;
-        }
+//        if(StringUtils.isNotEmpty(this.memo2)){
+//            this.name += "   "+this.memo2;
+//        }
     }
     public Date getMdate() {
         return mdate;

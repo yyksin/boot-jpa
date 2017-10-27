@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().httpBasic();
     }
 
+
 //    @Configuration
 //    public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
 //

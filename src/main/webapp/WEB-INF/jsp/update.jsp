@@ -21,6 +21,12 @@
             <div class="col-md-7">
                 <textarea class="form-control" name="memo1" rows="2">${obj.memo1}</textarea>
             </div>
+            <span style="float: left;">
+                <select name="memo1_search_yn">
+                    <option value="Y" <c:if test="${obj.memo1_search_yn =='Y'}">selected</c:if>>포함</option>
+                    <option value="N" <c:if test="${obj.memo1_search_yn =='N'}">selected</c:if>>미포함</option>
+                </select>
+            </span>
         </div>
         <div class="form-group">
             <label class="control-label col-md-3">메모2</label>
