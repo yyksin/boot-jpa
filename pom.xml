@@ -5,7 +5,7 @@
 
 	<groupId>com.jpa.project</groupId>
 	<artifactId>jpa</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>ROOT</version>
 	<packaging>war</packaging>
 
 	<name>jpa</name>
