@@ -171,4 +171,14 @@ public class HomeController {
         logger.info("json data : {}", result);
         return result;
     }
+
+    /**
+     * 등록 및 수정
+     * @param t_search
+     * @return
+     */
+    @RequestMapping("/storefarm")
+    public String storefarm(@ModelAttribute T_SEARCH t_search){
+        return "storefarm";
+    }
 }
