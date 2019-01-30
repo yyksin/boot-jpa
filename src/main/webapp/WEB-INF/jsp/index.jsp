@@ -26,7 +26,8 @@
                 <li><a href="/update">UPDATE</a></li>
                 <li><a href="/list">LIST</a></li>
                 <li><a href="/my">MY</a></li>
-                <li><a href="/storefarm">STOREFARM</a></li>
+                <%--<li><a href="/storefarm">STOREFARM</a></li>--%>
+                <%--<li><a href="/storefarmSearch">STORE_SEARCH</a></li>--%>
                 <li><a href="/logout">LOGOUT</a></li>
             </ul>
         </div>
